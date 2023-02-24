@@ -1,0 +1,22 @@
+3 character: tama gian und patti
+jeder hat eine fähigkeit
+
+
+Game Jam Weekend Game
+
+Erstes Leve Brainstorm:
+	Ein Massiver Regen von Ideen (Keyboardtasten, Kaffee, Gummibärchen, etc) prasselt auf uns ab und wir müssen ausweichen. Dabei gibt es eine Idee die es auf zu fangen gilt: Wenn man das geschafft hat kommt man ins nächste Level.
+	
+	dann werden die fähigkeiten der charater erklärt.
+
+	Tama kann neue inhalte hinzufügen: Character, Gegenstände, Brücken?
+	Patti kann bestimmte Töne mit seinem Tongerät aufzunehmen und diese können dann wieder andere fähigkeiten auslösen. bsp: jemand skyrim und er kann die fusrohda fähikeit nutzen..
+	Oder er nimmt vögel geräusche auf und kann dadurch andere Vögel spawnen
+	Gian kann durch finden vom Bugs die programmierung des Spiels ändern, physics ausschalten, größe von charaters ändern oder so.
+
+level 2:
+
+
+
+
+
