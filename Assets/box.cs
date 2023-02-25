@@ -13,11 +13,15 @@ public class box : MonoBehaviour
     
     public Boolean goleft, goright;
 
+    public Sprite spriteNormal, spriteBounced;
+
     public KeyCode upkey, downKey, leftKey, rightKey;
     
     public BounceState bounceState = BounceState.No;
     void Start()
     {
+        // Resources.LoadAll<Sprite>(spriteNormal);
+        // Assets/Sprites/Character/Ball_Player_Character.png
     }
 
     // Update is called once per frame
@@ -77,17 +81,14 @@ public class box : MonoBehaviour
 
     private void input()
     {
-        var characterBounceScale = Globals.characterBounceScale;
         if (Input.GetKeyDown(upkey))
         {
-            bounceState = BounceState.Start;
-            // bounce();
-            transform.localScale += new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
+            bounceStart();
         }
 
         if (Input.GetKeyUp(upkey))
         {
-            transform.localScale -= new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
+            bounceStop();
         }
         
         if (Input.GetKeyDown(leftKey))
@@ -110,6 +111,21 @@ public class box : MonoBehaviour
             this.goright = false;
         }
         
+    }
+
+    private void bounceStop()
+    {
+        var characterBounceScale = Globals.characterBounceScale;
+        transform.localScale -= new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
+        GetComponent<SpriteRenderer>().sprite = spriteNormal;
+    }
+
+    private void bounceStart()
+    {
+        var characterBounceScale = Globals.characterBounceScale;
+        bounceState = BounceState.Start;
+        transform.localScale += new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
+        GetComponent<SpriteRenderer>().sprite = spriteBounced;
     }
 
     void setRadius(float r)
@@ -137,8 +153,7 @@ public class box : MonoBehaviour
             }
             Debug.Log(distwpcp.magnitude);
             
-            var intersect_ = 1;
-            rb.AddForce(cp.normal * Globals.bounceStrength * intersect_, ForceMode2D.Impulse);
+            rb.AddForce(cp.normal * Globals.bounceStrength, ForceMode2D.Impulse);
         }
 
         return contactPoint2Ds.Count;
