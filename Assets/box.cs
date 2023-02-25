@@ -11,13 +11,14 @@ public class box : MonoBehaviour
         No, Start, Bounce
     }
     
-    public Boolean goleft, goright;
 
     public Sprite spriteNormal, spriteBounced;
 
     public KeyCode upkey, downKey, leftKey, rightKey;
     
-    public BounceState bounceState = BounceState.No;
+    private Boolean goleft, goright;
+
+    private BounceState bounceState = BounceState.No;
     void Start()
     {
         // Resources.LoadAll<Sprite>(spriteNormal);
