@@ -76,16 +76,17 @@ public class box : MonoBehaviour
 
     private void input()
     {
+        var characterBounceScale = Globals.characterBounceScale;
         if (Input.GetKeyDown(KeyCode.W))
         {
             bounceState = BounceState.Start;
             // bounce();
-            setRadius(Globals.characterRadiusBounced);
+            transform.localScale += new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
         }
 
         if (Input.GetKeyUp(KeyCode.W))
         {
-            setRadius(Globals.characterRadius);
+            transform.localScale -= new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
         }
         
         if (Input.GetKeyDown(KeyCode.A))

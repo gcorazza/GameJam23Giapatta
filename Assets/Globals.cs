@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Globals
 {
-    public const float characterRadius = 0.26f;
-    public const float characterRadiusBounced = 0.6f;
+    public const float characterRadius = 0.41f;
+    public const float characterBounceScale = 0.2f;
     public const float bounceStrength = 5f;
     public const float maxRunningSpeed = 5f;
     
