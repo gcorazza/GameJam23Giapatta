@@ -351,32 +351,16 @@ GameObject:
   m_Component:
   - component: {fileID: 369234035}
   - component: {fileID: 369234034}
-  - component: {fileID: 369234033}
   - component: {fileID: 369234037}
   - component: {fileID: 369234036}
   - component: {fileID: 369234039}
   m_Layer: 0
-  m_Name: character
+  m_Name: Gian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &369234033
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 369234031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e741851cba3ad425c91ecf922cc6b379, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
 --- !u!212 &369234034
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -518,6 +502,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a7a74c675f5437ad54ea50afaf6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goleft: 0
+  goright: 0
+  upkey: 119
+  downKey: 115
+  leftKey: 97
+  rightKey: 100
+  bounceState: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

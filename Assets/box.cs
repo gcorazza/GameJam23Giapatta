@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class box : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     public enum BounceState
     {
@@ -13,6 +12,8 @@ public class box : MonoBehaviour
     }
     
     public Boolean goleft, goright;
+
+    public KeyCode upkey, downKey, leftKey, rightKey;
     
     public BounceState bounceState = BounceState.No;
     void Start()
@@ -77,38 +78,37 @@ public class box : MonoBehaviour
     private void input()
     {
         var characterBounceScale = Globals.characterBounceScale;
-        if (Input.GetKeyDown(KeyCode.W))
+        if (Input.GetKeyDown(upkey))
         {
             bounceState = BounceState.Start;
             // bounce();
             transform.localScale += new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
         }
 
-        if (Input.GetKeyUp(KeyCode.W))
+        if (Input.GetKeyUp(upkey))
         {
             transform.localScale -= new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
         }
         
-        if (Input.GetKeyDown(KeyCode.A))
+        if (Input.GetKeyDown(leftKey))
         {
             this.goleft = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.A))
+        if (Input.GetKeyUp(leftKey))
         {
             this.goleft = false;
         }
         
-        if (Input.GetKeyDown(KeyCode.D))
+        if (Input.GetKeyDown(rightKey))
         {
             this.goright = true;
         }
 
-        if (Input.GetKeyUp(KeyCode.D))
+        if (Input.GetKeyUp(rightKey))
         {
             this.goright = false;
         }
-        
         
     }
 
@@ -131,7 +131,10 @@ public class box : MonoBehaviour
             Debug.Log(cp.otherRigidbody.velocity.ToString());
 
             var distwpcp = rb.worldCenterOfMass - cp.point;
-            insertDebugPoint(cp.point.x, cp.point.y);
+            if (Globals.debugMode)
+            {
+                insertDebugPoint(cp.point.x, cp.point.y);
+            }
             Debug.Log(distwpcp.magnitude);
             
             var intersect_ = 1;
