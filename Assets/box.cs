@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class box : MonoBehaviour
 {
@@ -21,8 +22,8 @@ public class box : MonoBehaviour
     private BounceState bounceState = BounceState.No;
     void Start()
     {
-        // Resources.LoadAll<Sprite>(spriteNormal);
-        // Assets/Sprites/Character/Ball_Player_Character.png
+        var rigidbody = GetComponent<Rigidbody2D>();
+        rigidbody.AddForce(new Vector2(Random.Range(-2,2), Random.Range(-2,2)),ForceMode2D.Impulse);
     }
 
     // Update is called once per frame
@@ -141,20 +142,19 @@ public class box : MonoBehaviour
 
         var contactPoint2Ds = new List<ContactPoint2D>();
         rb.GetContacts(contactPoint2Ds);
+        var bounceVec = new Vector2();
         foreach (var cp in contactPoint2Ds)
         {
-            Debug.Log(cp.collider.ToString() + " other: " + cp.otherCollider.ToString());
-            Debug.Log(contactPoint2Ds.Count);
-            Debug.Log(cp.otherRigidbody.velocity.ToString());
-
-            var distwpcp = rb.worldCenterOfMass - cp.point;
-            if (Globals.debugMode)
-            {
+            bounceVec += cp.normal;
+            if (Globals.debugMode) {
                 insertDebugPoint(cp.point.x, cp.point.y);
             }
-            Debug.Log(distwpcp.magnitude);
+        }
+
+        if (contactPoint2Ds.Count>0)
+        {
             
-            rb.AddForce(cp.normal * Globals.bounceStrength, ForceMode2D.Impulse);
+        rb.AddForce(bounceVec / contactPoint2Ds.Count * Globals.bounceStrength, ForceMode2D.Impulse);
         }
 
         return contactPoint2Ds.Count;
