@@ -7,7 +7,14 @@ public class box : MonoBehaviour
 {
     // Start is called before the first frame update
 
-    private Boolean goleft, goright;
+    public enum BounceState
+    {
+        No, Start, Bounce
+    }
+    
+    public Boolean goleft, goright;
+    
+    public BounceState bounceState = BounceState.No;
     void Start()
     {
     }
@@ -15,8 +22,8 @@ public class box : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        input();
         updateMovement();
+        input();
     }
 
     private void  updateMovement()
@@ -48,6 +55,14 @@ public class box : MonoBehaviour
             rigidbody.AddForce(new Vector2(-velocityX/6,0), ForceMode2D.Impulse);
         }
 
+        if (bounceState == BounceState.Start)
+        {
+            if (bounce() > 0 )
+            {
+                bounceState = BounceState.No;
+            }
+        }
+
     }
 
     private Boolean hasContact()
@@ -63,7 +78,8 @@ public class box : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.W))
         {
-            bounce();
+            bounceState = BounceState.Start;
+            // bounce();
             setRadius(Globals.characterRadiusBounced);
         }
 
@@ -100,8 +116,9 @@ public class box : MonoBehaviour
         GetComponent<CircleCollider2D>().radius = r;
     }
 
-    public void bounce()
+    public int bounce()
     {
+        Debug.Log("bounce");
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         var contactPoint2Ds = new List<ContactPoint2D>();
@@ -109,11 +126,24 @@ public class box : MonoBehaviour
         foreach (var cp in contactPoint2Ds)
         {
             Debug.Log(cp.collider.ToString() + " other: " + cp.otherCollider.ToString());
-            // otherColliderAttachedRigidbody.AddForceAtPosition(, otherColliderAttachedRigidbody.worldCenterOfMass);
             Debug.Log(contactPoint2Ds.Count);
             Debug.Log(cp.otherRigidbody.velocity.ToString());
+
+            var distwpcp = rb.worldCenterOfMass - cp.point;
+            insertDebugPoint(cp.point.x, cp.point.y);
+            Debug.Log(distwpcp.magnitude);
             
-            rb.AddForce(cp.normal * Globals.bounceStrength, ForceMode2D.Impulse);
+            var intersect_ = 1;
+            rb.AddForce(cp.normal * Globals.bounceStrength * intersect_, ForceMode2D.Impulse);
         }
+
+        return contactPoint2Ds.Count;
+    }
+
+    private static void insertDebugPoint(float x, float y)
+    {
+        var transform1 = GameObject.CreatePrimitive(PrimitiveType.Cube).transform;
+        transform1.Translate(x,y, 0);
+        transform1.localScale -= new Vector3(0.8f, 0.8f, 0.8f);
     }
 }
