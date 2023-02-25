@@ -9,7 +9,7 @@ public class box : MonoBehaviour
 
     public enum BounceState
     {
-        No, Start, Bounce
+        No, Start
     }
     
 
@@ -117,6 +117,7 @@ public class box : MonoBehaviour
 
     private void bounceStop()
     {
+        bounceState = BounceState.No;
         var characterBounceScale = Globals.characterBounceScale;
         transform.localScale -= new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
         GetComponent<SpriteRenderer>().sprite = spriteNormal;
@@ -149,6 +150,8 @@ public class box : MonoBehaviour
             if (Globals.debugMode) {
                 insertDebugPoint(cp.point.x, cp.point.y);
             }
+
+            cp.collider.attachedRigidbody?.AddForce(-cp.normal *Globals.bounceStrength, ForceMode2D.Impulse);
         }
 
         if (contactPoint2Ds.Count>0)
