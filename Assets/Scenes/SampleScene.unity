@@ -375,8 +375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _data:
-    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[{"name":"scale","value":{"$content":1.0,"$type":"System.Single"},"typeHandle":{"Identification":"System.Single,
-      mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089","$version":"A"},"$version":"A"}],"$version":"A"},"$version":"A"}}'
+    _json: '{"declarations":{"Kind":"Object","collection":{"$content":[],"$version":"A"},"$version":"A"}}'
     _objectReferences: []
 --- !u!212 &369234034
 SpriteRenderer:
@@ -438,7 +437,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 369234031}
   m_LocalRotation: {x: -0, y: -0, z: 0.08319001, w: 0.99653375}
-  m_LocalPosition: {x: -2.7635, y: 1.3614, z: 0.01128089}
+  m_LocalPosition: {x: -3.76, y: 1.19, z: 0.01128089}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []

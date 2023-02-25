@@ -21,17 +21,42 @@ public class box : MonoBehaviour
 
     private void  updateMovement()
     {
+        
         var rigidbody = GetComponent<Rigidbody2D>();
         var velocityX = rigidbody.velocity.x;
-        if (this.goleft)
+        
+        var maxRunningSpeed = Globals.maxRunningSpeed;
+        
+        if (goleft)
         {
-            rigidbody.AddForce(new Vector2(-1,0));
+            var goleftV = velocityX>0
+                ? maxRunningSpeed*2
+                : Math.Max(maxRunningSpeed - Math.Abs(velocityX), 0);
+            rigidbody.AddForce(new Vector2(-goleftV,0));
         }
-        if (this.goright)
+        
+        if (goright)
         {
-            rigidbody.AddForce(new Vector2(1,0));
+            var gorightV = velocityX > 0
+                ? Math.Max(maxRunningSpeed - velocityX, 0)
+                : maxRunningSpeed * 2;
+            rigidbody.AddForce(new Vector2(gorightV,0));
         }
 
+        if (!goright && ! goleft && hasContact())
+        {
+            rigidbody.AddForce(new Vector2(-velocityX/6,0), ForceMode2D.Impulse);
+        }
+
+    }
+
+    private Boolean hasContact()
+    {
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+
+        var contactPoint2Ds = new List<ContactPoint2D>();
+        rb.GetContacts(contactPoint2Ds);
+        return contactPoint2Ds.Count != 0;
     }
 
     private void input()
