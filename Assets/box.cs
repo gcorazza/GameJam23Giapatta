@@ -12,7 +12,7 @@ public class box : MonoBehaviour
         No, Start
     }
     
-    public AudioSource audioSource;
+    public AudioSource jumpsound, rollsound, collisionsound, deathsound;
     public Sprite spriteNormal, spriteBounced;
 
     public KeyCode upkey, downKey, leftKey, rightKey;
@@ -22,6 +22,8 @@ public class box : MonoBehaviour
     private BounceState bounceState = BounceState.No;
     void Start()
     {
+        rollsound.Play();
+
         var rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.AddForce(new Vector2(Random.Range(-2,2), Random.Range(-2,2)),ForceMode2D.Impulse);
     }
@@ -55,6 +57,19 @@ public class box : MonoBehaviour
                 ? Math.Max(maxRunningSpeed - velocityX, 0)
                 : maxRunningSpeed * 2;
             rigidbody.AddForce(new Vector2(gorightV,0));
+        }
+
+        if ((goleft || goright) && hasContact())
+        {
+            // if (!rollsound.isPlaying)
+            // {
+            //     
+            // }
+            rollsound.Play();
+        }
+        else
+        {
+            rollsound.Stop();
         }
 
         if (!goright && ! goleft && hasContact())
@@ -125,7 +140,6 @@ public class box : MonoBehaviour
 
     private void bounceStart()
     {
-        audioSource.Play();
         var characterBounceScale = Globals.characterBounceScale;
         bounceState = BounceState.Start;
         transform.localScale += new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
@@ -139,7 +153,6 @@ public class box : MonoBehaviour
 
     public int bounce()
     {
-        Debug.Log("bounce");
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
 
         var contactPoint2Ds = new List<ContactPoint2D>();
@@ -157,8 +170,8 @@ public class box : MonoBehaviour
 
         if (contactPoint2Ds.Count>0)
         {
-            
-        rb.AddForce(bounceVec / contactPoint2Ds.Count * Globals.bounceStrength, ForceMode2D.Impulse);
+            jumpsound.Play();
+            rb.AddForce(bounceVec / contactPoint2Ds.Count * Globals.bounceStrength, ForceMode2D.Impulse);
         }
 
         return contactPoint2Ds.Count;
