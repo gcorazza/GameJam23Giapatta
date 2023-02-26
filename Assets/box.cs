@@ -12,7 +12,7 @@ public class box : MonoBehaviour
         No, Start
     }
     
-    public AudioSource jumpsound, rollsound, collisionsound, deathsound;
+    public RandomSoundPlayer jumpsounds, rollsounds, collisionsounds, deathsounds;
     public Sprite spriteNormal, spriteBounced;
 
     public KeyCode upkey, downKey, leftKey, rightKey;
@@ -22,10 +22,14 @@ public class box : MonoBehaviour
     private BounceState bounceState = BounceState.No;
     void Start()
     {
-        rollsound.Play();
-
         var rigidbody = GetComponent<Rigidbody2D>();
         rigidbody.AddForce(new Vector2(Random.Range(-2,2), Random.Range(-2,2)),ForceMode2D.Impulse);
+        var componentsInChildren = GetComponentsInChildren<AudioSource>();
+
+        jumpsounds = new RandomSoundPlayer(this.transform.Find("jumpsounds").gameObject.GetComponents<AudioSource>());
+        rollsounds = new RandomSoundPlayer(this.transform.Find("rollsounds").gameObject.GetComponents<AudioSource>());
+        collisionsounds = new RandomSoundPlayer(this.transform.Find("collisionsounds").gameObject.GetComponents<AudioSource>());
+        deathsounds = new RandomSoundPlayer(this.transform.Find("deathsounds").gameObject.GetComponents<AudioSource>());
     }
 
     // Update is called once per frame
@@ -33,6 +37,23 @@ public class box : MonoBehaviour
     {
         updateMovement();
         input();
+        checkCollisionForSound();
+    }
+
+    void checkCollisionForSound()
+    {
+        var rigidbody = GetComponent<Rigidbody2D>();
+        var contactPoint2Ds = new List<ContactPoint2D>();
+        rigidbody.GetContacts(contactPoint2Ds);
+        foreach (var contactPoint2D in contactPoint2Ds)
+        {
+            Debug.Log("sflkuvb"+ contactPoint2D.normalImpulse);
+            if (contactPoint2D.normalImpulse > 2f)
+            {
+                collisionsounds.Play();
+            }
+        }
+
     }
 
     private void  updateMovement()
@@ -59,17 +80,16 @@ public class box : MonoBehaviour
             rigidbody.AddForce(new Vector2(gorightV,0));
         }
 
-        if ((goleft || goright) && hasContact())
-        {
-            // if (!rollsound.isPlaying)
-            // {
-            //     
-            // }
-            rollsound.Play();
-        }
-        else
-        {
-            rollsound.Stop();
+        if ((goleft || goright)) { // && hasContact()
+            // Debug.Log("start");
+
+            if (!rollsounds.isPlaying())
+            {
+                rollsounds.Play();
+            }
+        } else {
+            // Debug.Log("stop");
+            rollsounds.Stop();
         }
 
         if (!goright && ! goleft && hasContact())
@@ -170,7 +190,7 @@ public class box : MonoBehaviour
 
         if (contactPoint2Ds.Count>0)
         {
-            jumpsound.Play();
+            jumpsounds.Play();
             rb.AddForce(bounceVec / contactPoint2Ds.Count * Globals.bounceStrength, ForceMode2D.Impulse);
         }
 
