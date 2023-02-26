@@ -1397,10 +1397,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a7a74c675f5437ad54ea50afaf6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpsound: {fileID: 446873608}
-  rollsound: {fileID: 1066056174}
-  collisionsound: {fileID: 0}
-  deathsound: {fileID: 0}
+  jumpsounds: {fileID: 0}
+  rollsounds: {fileID: 0}
+  collisionsounds: {fileID: 0}
+  deathsounds: {fileID: 0}
   spriteNormal: {fileID: -1895663195, guid: 4a4a06c59ffeb544189ac2611b472f2b, type: 3}
   spriteBounced: {fileID: -346632479, guid: 4a4a06c59ffeb544189ac2611b472f2b, type: 3}
   upkey: 119
@@ -1753,7 +1753,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.020210266, y: 0}
+  m_Offset: {x: 0.098846436, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1764,7 +1764,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 3.9026642, y: 1}
+  m_Size: {x: 7.005371, y: 1}
   m_EdgeRadius: 0
 --- !u!224 &411533146
 RectTransform:
@@ -1783,7 +1783,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.07, y: -3.4}
+  m_AnchoredPosition: {x: 151.4, y: -40.47}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &411533147
@@ -2439,10 +2439,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a7a74c675f5437ad54ea50afaf6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpsound: {fileID: 446873608}
-  rollsound: {fileID: 1066056174}
-  collisionsound: {fileID: 0}
-  deathsound: {fileID: 0}
+  jumpsounds: {fileID: 0}
+  rollsounds: {fileID: 0}
+  collisionsounds: {fileID: 0}
+  deathsounds: {fileID: 0}
   spriteNormal: {fileID: -1349455206, guid: 4a4a06c59ffeb544189ac2611b472f2b, type: 3}
   spriteBounced: {fileID: 1770552301, guid: 4a4a06c59ffeb544189ac2611b472f2b, type: 3}
   upkey: 105
@@ -5150,10 +5150,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce7a7a74c675f5437ad54ea50afaf6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpsound: {fileID: 446873608}
-  rollsound: {fileID: 1066056174}
-  collisionsound: {fileID: 0}
-  deathsound: {fileID: 0}
+  jumpsounds: {fileID: 0}
+  rollsounds: {fileID: 0}
+  collisionsounds: {fileID: 0}
+  deathsounds: {fileID: 0}
   spriteNormal: {fileID: -576252856, guid: 4a4a06c59ffeb544189ac2611b472f2b, type: 3}
   spriteBounced: {fileID: -1346560356, guid: 4a4a06c59ffeb544189ac2611b472f2b, type: 3}
   upkey: 273
