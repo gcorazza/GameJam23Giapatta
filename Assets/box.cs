@@ -12,7 +12,7 @@ public class box : MonoBehaviour
         No, Start
     }
     
-
+    public AudioSource audioSource;
     public Sprite spriteNormal, spriteBounced;
 
     public KeyCode upkey, downKey, leftKey, rightKey;
@@ -125,6 +125,7 @@ public class box : MonoBehaviour
 
     private void bounceStart()
     {
+        audioSource.Play();
         var characterBounceScale = Globals.characterBounceScale;
         bounceState = BounceState.Start;
         transform.localScale += new Vector3(characterBounceScale, characterBounceScale, characterBounceScale);
