@@ -47,7 +47,6 @@ public class box : MonoBehaviour
         rigidbody.GetContacts(contactPoint2Ds);
         foreach (var contactPoint2D in contactPoint2Ds)
         {
-            Debug.Log("sflkuvb"+ contactPoint2D.normalImpulse);
             if (contactPoint2D.normalImpulse > 2f)
             {
                 collisionsounds.Play();
